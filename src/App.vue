@@ -1,17 +1,34 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <app-header />
+  <app-filter />
+
+  <main class="app-main">
+    <app-todo-list />
+    <app-add-button />
+  </main>
+
+  <app-footer />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import {
+  AppAddButton,
+  AppFilter,
+  AppFooter,
+  AppHeader,
+  AppTodoList,
+} from '@/components';
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
-  }
+    AppAddButton,
+    AppFilter,
+    AppFooter,
+    AppHeader,
+    AppTodoList,
+  },
 });
 </script>
 
