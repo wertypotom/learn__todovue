@@ -1,19 +1,46 @@
 <template>
   <aside class="app-filters">
     <section class="toggle-group">
-      <button class="button button--primary">All</button>
-      <button class="button">Active</button>
-      <button class="button">Done</button>
+      <button
+        v-for="button in buttons"
+        :key="button"
+        class="button"
+        :class="{ 'button--primary': activeFilter === button }"
+        @click="handleFilter(button)"
+      >
+        {{ button }}
+      </button>
     </section>
   </aside>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { FilterButtons } from '@/types/ITodo';
+import { PropType, defineComponent } from 'vue';
+
+type FilterState = {
+  buttons: FilterButtons[];
+};
 
 export default defineComponent({
-  setup() {
-    return {};
+  data(): FilterState {
+    return {
+      buttons: ['Active', 'All', 'Done'],
+    };
+  },
+  methods: {
+    handleFilter(filter: FilterButtons) {
+      this.$emit('handleFilter', filter);
+    },
+  },
+  props: {
+    activeFilter: {
+      type: String as PropType<FilterButtons>,
+      required: true,
+    },
+  },
+  emits: {
+    handleFilter: (filter: FilterButtons) => true,
   },
 });
 </script>
